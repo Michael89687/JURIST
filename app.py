@@ -115,10 +115,15 @@ def model(text):
     clustered_data = empty
 
     for value in set(clustered_data['label']):
-        if len(clustered_data.loc[clustered_data['label'] == value]) < 3: #Removes clusters with less than 3 articles
+        if len(clustered_data.loc[clustered_data['label'] == value]) < 5: #Removes clusters with less than 5 articles
             clustered_data = clustered_data[clustered_data['label'] != value]
 
     cluster_num = set(clustered_data['label'])
+    
+    if len(cluster_num) == 0:
+        raise ValueError()
+    else:
+        pass
     
     combined = []
     number_text = []
