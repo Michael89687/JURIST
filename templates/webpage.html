@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<title>JURIST Timeline</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/w3.css') }}">
+<style>
+body {font-family: "Times New Roman", Georgia, Serif;}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display";
+  letter-spacing: 2px;
+}
+</style>
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:1.5px;">
+	  <a href="#home" class="w3-bar-item w3-button"><h3>JURIST Timeline</h3></a>
+    <!-- Right-sided navbar links. Hide them on small screens -->
+    <div class="w3-right w3-hide-small">
+	    <a href="#search" class="w3-bar-item w3-button"><h5>Article Search</h5></a>
+	    <a href="#cluster" class="w3-bar-item w3-button"><h5>Article Clustering</h5></a>
+	    <a href="#about" class="w3-bar-item w3-button"><h5>How Clustering Works</h5></a>
+	    <a href="#topics" class="w3-bar-item w3-button"><h5>Clustering Topics</h5></a>
+    </div>
+  </div>
+</div>
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:2100px">
+
+<br>
+<br>
+<br>
+
+  <!-- All Articles Section -->
+  <div class="w3-row w3-padding-64" id="search">
+
+	  <h1><center>JURIST Article Search</center></h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('article')}}"method="post">
+	<input class="w3-input w3-padding-16" type="text" name="articles" placeholder="🔎 Search Articles by Keyword (Ex. Trump, Supreme Court, Congress, etc.)" required name="Name" size="40">
+        <center><button type="submit" class="w3-button w3-light-grey w3-section">Search</button></center>
+    </form>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/timeline2.css') }}">
+{% for years, date_range, timeline_info in articles %}
+<h2>{{years}}</h2>
+<h3>{{date_range}}</h3>
+<section class="time-line-box">
+<div class="swiper-container text-center"> 
+<div class="swiper-wrapper">
+{% for cluster in timeline_info %}
+<div class="swiper-slide">
+<div class="timestamp"><span class="date">{{cluster['date']}}</span></div>
+<div class="status"><span><a href={{cluster['link']}}>{{cluster['title']}}</a></span></div>
+</div>
+{% endfor %}
+</div>
+<div class="swiper-pagination"></div>
+</div>
+</section>
+<br>	  
+{% endfor %} 
+	  
+  <hr>
+	
+  <!-- About Section -->
+  <div class="w3-row w3-padding-64" id="cluster">
+
+	  <h1><center>Break Down Topics into Timeline Clusters</center></h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+	<input class="w3-input w3-padding-16" type="text" name="experience" placeholder="🔎 Ex. FCC, Facebook, Russia, FBI, Obama, Federal Appeals Court, etc." required name="Name" size="40">
+        <center><button type="submit" class="w3-button w3-light-grey w3-section">Search</button></center>
+    </form>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/timeline.css') }}">
+{% for number, topics, date_range, timeline_info in items %}
+<h2>{{number}}</h2>
+<h3>{{topics}}</h3>
+<h3>{{date_range}}</h3>
+<section class="time-line-box">
+<div class="swiper-container text-center"> 
+<div class="swiper-wrapper">
+{% for cluster in timeline_info %}
+<div class="swiper-slide">
+<div class="timestamp"><span class="date">{{cluster['date']}}</span></div>
+<div class="status"><span><a href={{cluster['link']}}>{{cluster['title']}}</a></span></div>
+</div>
+{% endfor %}
+</div>
+<div class="swiper-pagination"></div>
+</div>
+</section>
+<br>
+<br>
+<br>  
+{% endfor %}
+	  
+  <hr>
+  
+  <!-- Menu Section -->
+  <div class="w3-row w3-padding-64" id="about">
+    <div class="w3-col l6 w3-padding-large">
+      <h1 class="w3-center">How Clustering Works</h1><br>
+      <h4>Using Machine Learning powered by JURIST articles, we break down a broad topic (Ex. Facebook) into smaller subsets (Ex. Privacy, Antitrust) of articles that are displayed on timelines.</h4> 
+<br>
+      <h4>We believe that understanding the development of any broad and complex news topic shouldn't involve a time-consuming search process.</h4>	   
+    </div>
+	  
+    <div class="w3-col l6 w3-padding-large">
+      <img src="https://i.ibb.co/3MNDQXV/Screen-Shot-2020-08-24-at-4-56-25-PM.png" alt="Menu" style="width:100%">
+    </div>  
+  </div>
+
+  <hr>
+
+  <!-- Menu Section -->
+  <div class="w3-row w3-padding-64" id="topics">
+    <div class="w3-col l6 w3-padding-large">
+      <h1 class="w3-center">Clustering Topics</h1><br>
+      <h4>Need some help searching for topics? No worries, we got you covered. Try searching any one of these topics and remember to keep your search term broad and not too detailed.</h4> 
+    </div>
+	  
+    <div class="w3-col l6 w3-padding-large">
+      <img src="https://i.ibb.co/N76Zdk4/Screen-Shot-2020-08-24-at-5-22-52-PM.png" alt = "Menu" style = "width:100%">
+    </div>  
+  </div>
+  
+<!-- End page content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-center w3-light-grey w3-padding-32">
+  <p>Made with lots of love by Michael with guidance from his friends at <a href="https://www.jurist.org" title="W3.CSS" target="_blank" class="w3-hover-text-green">JURIST</a></p>
+</footer>
+
+</body>
+</html>
