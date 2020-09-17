@@ -1,8 +1,8 @@
 .time-line-box {
-  height: 140px; 
-  padding: 160px 0;
+  height: 100px; 
+  padding: 120px 0;
   width: 100%;
-  background-color: #ffffff;
+  background-color: #dadefe;
 }
 
 .time-line-box .timeline {
