@@ -157,7 +157,7 @@ def model(text):
         first_date = dates[0]
         last_date = dates[-1]
         #Displays date range text on HTML
-        date_range_text.append(" - " + "From " + str(first_date['date']) + " to " + str(last_date['date']))
+        date_range_text.append("   " + "From " + str(first_date['date']) + " to " + str(last_date['date']))
         
         titles = []
         for i in clustered['1']:
