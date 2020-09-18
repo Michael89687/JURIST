@@ -1,6 +1,6 @@
 .time-line-box {
   height: 100px; 
-  padding: 150px 0;
+  padding: 160px 0;
   width: 100%;
   background-color: #ffffff;
 }
@@ -71,7 +71,7 @@
 .swiper-slide {
   text-align: center;
   font-size: 18px;
-  width: 300px;
+  width: 315px;
   height: 100%;
   position: relative;
 }
